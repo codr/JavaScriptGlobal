@@ -1,11 +1,21 @@
 (function(window, undefined) {
 
-  var Analyzer = function() {
+  var Analyzer = function(object) {
+    this.extractProperties(object);
+  }
 
+  Analyzer.prototype.extractProperties = function(object) {
+    this.props = this.props || {};
+    for (var prop in object) {
+      this.props[prop] = {
+        type: typeof object[prop],
+        value: object[prop]
+      }
+    }
   }
 
   Analyzer.prototype.analyze = function() {
-    var globalProps = window.opener,
+    var globalProps = this.props,
         cleanWindow = window;
         
     for (var prop in cleanWindow) {
@@ -14,11 +24,10 @@
       }
     }
     
-    var body = document.getElementByTagName('body');
     for (var prop in globalProps) {
       var el = document.createElement('p');
       el.innerHTML = prop;
-      body.appendChild(el);
+      document.appendChild(el);
     }
 
     console.dir(globalProps);
@@ -35,7 +44,7 @@
     'GoogleAnalytics':  'gaJsHost gaGlobal _gat _gaq pageTracker'.split(' ')
   };
 
-  var examine = new Analyzer();
+  var examine = new Analyzer(window.opener);
   examime.analyze();
 
 })(window);
