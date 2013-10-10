@@ -44,7 +44,7 @@
     'GoogleAnalytics':  'gaJsHost gaGlobal _gat _gaq pageTracker'.split(' ')
   };
 
-  var examine = new Analyzer(window.opener);
-  examime.analyze();
+  var openerAnalyer = new Analyzer(window.opener);
+  openerAnalyer.analyze();
 
 })(window);
