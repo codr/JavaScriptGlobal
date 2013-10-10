@@ -18,7 +18,7 @@
     var body = document.getElementsByTagName('body');
     if (!body.length) {
       body = document.createElement('body');
-      document.getElementsByTagName('html').appendChild(body);
+      document.getElementsByTagName('html')[0].appendChild(body);
     }
     return body;
   }
