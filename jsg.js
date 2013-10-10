@@ -14,7 +14,7 @@
     }
   }
 
-  Analyzer.prototype.getBody() {
+  Analyzer.prototype.getBody = function() {
     var body = document.getElementByTagName('body');
     if (!body.length) {
       body = document.createElement('body');
