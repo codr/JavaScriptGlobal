@@ -14,6 +14,15 @@
     }
   }
 
+  Analyzer.prototype.getBody() {
+    var body = document.getElementByTagName('body');
+    if (body.length) {
+      body = document.createElement('body');
+      document.getElementByTagName('html').appendChild(body);
+    }
+    return body;
+  }
+
   Analyzer.prototype.analyze = function() {
     var globalProps = this.props,
         cleanWindow = window;
@@ -24,10 +33,11 @@
       }
     }
     
+    body = this.getBody();
     for (var prop in globalProps) {
       var el = document.createElement('p');
       el.innerHTML = prop;
-      document.appendChild(el);
+      body.appendChild(el);
     }
 
     console.dir(globalProps);
