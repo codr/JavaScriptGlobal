@@ -15,10 +15,10 @@
   }
 
   Analyzer.prototype.getBody = function() {
-    var body = document.getElementByTagName('body');
+    var body = document.getElementsByTagName('body');
     if (!body.length) {
       body = document.createElement('body');
-      document.getElementByTagName('html').appendChild(body);
+      document.getElementsByTagName('html').appendChild(body);
     }
     return body;
   }
