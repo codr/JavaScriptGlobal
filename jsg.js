@@ -16,7 +16,7 @@
 
   Analyzer.prototype.getBody() {
     var body = document.getElementByTagName('body');
-    if (body.length) {
+    if (!body.length) {
       body = document.createElement('body');
       document.getElementByTagName('html').appendChild(body);
     }
