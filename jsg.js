@@ -2,7 +2,7 @@
 
   var Analyzer = function(object) {
     this.extractProperties(object);
-  }
+  };
 
   Analyzer.prototype.extractProperties = function(object) {
     this.props = this.props || {};
@@ -10,9 +10,9 @@
       this.props[prop] = {
         type: typeof object[prop],
         value: object[prop]
-      }
+      };
     }
-  }
+  };
 
   Analyzer.prototype.getBody = function() {
     var body = document.getElementsByTagName('body');
@@ -21,28 +21,27 @@
       document.getElementsByTagName('html')[0].appendChild(body);
     }
     return body;
-  }
+  };
 
   Analyzer.prototype.analyze = function() {
     var globalProps = this.props,
-        cleanWindow = window;
+        cleanWindow = window,
+        prop;
         
-    for (var prop in cleanWindow) {
+    for (prop in cleanWindow) {
       if (globalProps[prop]) {
         delete globalProps[prop];
       }
     }
     
-    body = this.getBody();
-    for (var prop in globalProps) {
+    var body = this.getBody();
+    for (prop in globalProps) {
       var el = document.createElement('p');
       el.innerHTML = prop;
       body.appendChild(el);
     }
 
-    console.dir(globalProps);
-    console.log('Total number of properties: ' + getPropsCount(globalProps));
-  }
+  };
 
   Analyzer.prototype.propSets = {
     'Prototype':        '$$ $A $F $H $R $break $continue $w Abstract Ajax Class Enumerable Element Field Form ' +
