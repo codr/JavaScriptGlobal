@@ -23,13 +23,29 @@
     return body;
   };
 
+  Analyzer.prototype.isCommonLibrary = function(propToCheck) {
+    for (var prop in this.propSets) {
+      if (this.propSets[prop].indexOf(propToCheck) > -1) {
+        return true;
+      }
+    }
+  }
+
   Analyzer.prototype.analyze = function() {
     var globalProps = this.props,
         cleanWindow = window,
         prop;
-        
+
+    // remove globals that exists in a clean window.
     for (prop in cleanWindow) {
       if (globalProps[prop]) {
+        delete globalProps[prop];
+      }
+    }
+
+    // remove globals that are specific to frameworks.
+    for (prop in globalProps) {
+      if (this.isCommonLibrary(prop)) {
         delete globalProps[prop];
       }
     }
