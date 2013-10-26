@@ -10,3 +10,4 @@ Copy the following code into a bookmarlet:
 
 #### TODO
 - Make variables expandable
+- Clean up presentation.
